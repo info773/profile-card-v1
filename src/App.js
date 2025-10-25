@@ -1,5 +1,38 @@
 import "./App.css";
 
+const skills = [
+  {
+    skill: "HTML+CSS",
+    level: "advanced",
+    color: "#2662EA",
+  },
+  {
+    skill: "JavaScript",
+    level: "advanced",
+    color: "#EFD81D",
+  },
+  {
+    skill: "Web Design",
+    level: "advanced",
+    color: "#C3DCAF",
+  },
+  {
+    skill: "Git and GitHub",
+    level: "intermediate",
+    color: "#E84F33",
+  },
+  {
+    skill: "React",
+    level: "advanced",
+    color: "#60DAFB",
+  },
+  {
+    skill: "Svelte",
+    level: "beginner",
+    color: "#FF3B00",
+  },
+];
+
 function App() {
   return (
     <div className="card">
@@ -40,22 +73,34 @@ function Intro() {
 function SkillList() {
   return (
     <div className="skill-list">
-      <Skill name="React" emoji="❤️" style={{ backgroundColor: "red" }} />
-      <Skill name="Html" emoji="🏋🏻‍♀️" style={{ backgroundColor: "blue" }} />
-      <Skill name="CSS" emoji="🥑" style={{ backgroundColor: "yellow" }} />
-      <Skill
-        name="Javascript"
-        emoji="🧠"
-        style={{ backgroundColor: "green" }}
-      />
+      {/* <Skill name="React" emoji="❤️" style={{ backgroundColor: "red" }} /> */}
+      {skills.map((skill) => (
+        <Skill skillObj={skill} key={skill.skill} />
+      ))}
     </div>
   );
 }
 
-function Skill(props) {
+function Skill({ skillObj }) {
+  let emoji = "";
+
+  switch (skillObj.level) {
+    case "beginner":
+      emoji = "👶";
+      break;
+    case "intermediate":
+      emoji = "👍";
+      break;
+    case "advanced":
+      emoji = "💪";
+      break;
+    default:
+      emoji = "🥑";
+  }
+
   return (
-    <span style={props.style} className="skill">
-      {props.name} {props.emoji}
+    <span style={{ backgroundColor: skillObj.color }} className="skill">
+      {skillObj.skill} {emoji}
     </span>
   );
 }
